@@ -1,0 +1,8 @@
+namespace WidgetFTServer
+{
+    [default_interface]
+    runtimeclass WidgetftFactory
+    {
+        void Test();
+    }
+}
