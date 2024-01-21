@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" 
+<Project ToolsVersion="15.0"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup Label="BeforeMicrosoftCppProps">
@@ -7,7 +7,7 @@
     <CppWinRTLibs>true</CppWinRTLibs>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
-  
+
   <!-- Non-Release configuration properties -->
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="BeforeMicrosoftCppProps">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -52,7 +52,7 @@
       <!-- This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library (W4221) -->
       <!-- <AdditionalOptions>/IGNORE:4221 %(AdditionalOptions)</AdditionalOptions> -->
     </Lib>
-    
+
     <!-- COMMON Compiler options -->
     <ClCompile>
       <SDLCheck>true</SDLCheck>
@@ -87,7 +87,7 @@
 
       <!-- Feature flags are defined in GameBar.Cpp.Default.props and can be passed on command line -->
       <PreprocessorDefinitions Condition="'$(FeatureFlags)'!=''">%(PreprocessorDefinitions);$(FeatureFlags)</PreprocessorDefinitions>
-      
+
       <!-- WORKAROUND for compiler issue in VS toolset -->
       <!-- https://developercommunity.visualstudio.com/content/problem/815760/cllink-regression-regarding-duplicate-symbols-ando.html -->
       <!-- Pending fix: https://devdiv.visualstudio.com/DevDiv/_git/msvc/pullrequest/209643 -->
@@ -95,10 +95,10 @@
 
       <!-- Disable warning about use of std::result_of in C++17 -->
       <PreprocessorDefinitions>%(PreprocessorDefinitions);_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING</PreprocessorDefinitions>
-      
+
       <!-- Additional Includes -->
       <!-- <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(GbSourceDirectory)GameBarCommon\Inc</AdditionalIncludeDirectories> -->
-      
+
       <!-- Version information -->
       <PreprocessorDefinitions>
         %(PreprocessorDefinitions);
@@ -108,13 +108,13 @@
         VERSION_REVISION=$(VersionRevision);
       </PreprocessorDefinitions>
     </ClCompile>
-    
+
     <!-- DEBUG Compiler options -->
     <ClCompile Condition="'$(Configuration)' == 'Debug'">
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    
+
     <!-- RELEASE Compiler options -->
     <ClCompile Condition="'$(Configuration)' == 'Release'">
       <Optimization>MaxSpeed</Optimization>
@@ -123,13 +123,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    
+
     <!-- PREFAST Compiler options -->
     <ClCompile Condition="'$(Configuration)' == 'Prefast'">
       <!-- If prefast is enabled, add the flags prefast/analyze needs -->
       <AdditionalOptions>/analyze /analyze:stacksize32767 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-    
+
 
     <!-- COMMON Linker options -->
     <Link>

@@ -35,7 +35,7 @@
 
             <LibPath Condition="'%(LibPath)' != ''">%(LibPath)</LibPath>
             <LibPath Condition="'%(LibPath)' == ''">$(ProjectIndependentOutDir)%(Identity)\%(Identity).lib</LibPath>
-            
+
             <LayoutPath Condition="'%(LayoutPath)' != '' and '%(Dll)' == 'true'">%(LayoutPath)</LayoutPath>
             <LayoutPath Condition="'%(LayoutPath)' == '' and '%(Dll)' == 'true'">$(LibPath)%(Identity)\</LayoutPath>
 
