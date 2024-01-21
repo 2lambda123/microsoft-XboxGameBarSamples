@@ -1,28 +1,22 @@
-#include "pch.h"
 #include "WidgetftFactory.h"
+#include "pch.h"
 
-namespace winrt::WidgetFTServer::implementation
-{
-WidgetftFactory::WidgetftFactory()
-{
-    auto modulePtr = ::Microsoft::WRL::GetModuleBase();
-    if (modulePtr != nullptr)
-    {
-        modulePtr->IncrementObjectCount();
-    }
+namespace winrt::WidgetFTServer::implementation {
+WidgetftFactory::WidgetftFactory() {
+  auto modulePtr = ::Microsoft::WRL::GetModuleBase();
+  if (modulePtr != nullptr) {
+    modulePtr->IncrementObjectCount();
+  }
 }
 
-WidgetftFactory::~WidgetftFactory()
-{
-    auto modulePtr = ::Microsoft::WRL::GetModuleBase();
-    if (modulePtr != nullptr)
-    {
-        modulePtr->DecrementObjectCount();
-    }
+WidgetftFactory::~WidgetftFactory() {
+  auto modulePtr = ::Microsoft::WRL::GetModuleBase();
+  if (modulePtr != nullptr) {
+    modulePtr->DecrementObjectCount();
+  }
 }
 
-void WidgetftFactory::Test()
-{
-    OutputDebugString(L"Hello this is  workinngggggg");
+void WidgetftFactory::Test() {
+  OutputDebugString(L"Hello this is  workinngggggg");
 }
-}
+} // namespace winrt::WidgetFTServer::implementation

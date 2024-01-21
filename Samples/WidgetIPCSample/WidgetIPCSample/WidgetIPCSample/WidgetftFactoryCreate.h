@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Windows.h>
 #include "winrt\WidgetFTServer.h"
+#include <Windows.h>
 
-namespace winrt::WidgetIPCSample::implementation
-{
+namespace winrt::WidgetIPCSample::implementation {
 WidgetFTServer::WidgetftFactory WidgetftFactoryCreate();
 }
