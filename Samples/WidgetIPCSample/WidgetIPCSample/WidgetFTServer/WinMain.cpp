@@ -14,10 +14,10 @@ HRESULT InitializeComSecurity()
 {
     wil::unique_hlocal_security_descriptor securityDescriptor;
     RETURN_LAST_ERROR_IF(!ConvertStringSecurityDescriptorToSecurityDescriptorW(
-        c_ComSecurityDescriptor,
-        SDDL_REVISION_1,
-        &securityDescriptor,
-        NULL));
+                             c_ComSecurityDescriptor,
+                             SDDL_REVISION_1,
+                             &securityDescriptor,
+                             NULL));
 
     DWORD headerSize = 0;
     DWORD daclSize = 0;
@@ -28,7 +28,7 @@ HRESULT InitializeComSecurity()
     // Convert to an absolute SD to extract pointers to different components; we
     // do this to avoid a dependency on internal APIs.
     MakeAbsoluteSD(securityDescriptor.get(), nullptr, &headerSize, nullptr, &daclSize,
-        nullptr, &saclSize, nullptr, &ownerSize, nullptr, &groupSize);
+                   nullptr, &saclSize, nullptr, &ownerSize, nullptr, &groupSize);
 
     DWORD totalSize = headerSize + daclSize + saclSize + ownerSize + groupSize;
 
@@ -42,28 +42,28 @@ HRESULT InitializeComSecurity()
     PSID group = reinterpret_cast<PSID>(position += ownerSize);
 
     RETURN_IF_WIN32_BOOL_FALSE(MakeAbsoluteSD(
-        securityDescriptor.get(),
-        absoluteSd.get(),
-        &headerSize,
-        dacl,
-        &daclSize,
-        sacl,
-        &saclSize,
-        owner,
-        &ownerSize,
-        group,
-        &groupSize));
+                                   securityDescriptor.get(),
+                                   absoluteSd.get(),
+                                   &headerSize,
+                                   dacl,
+                                   &daclSize,
+                                   sacl,
+                                   &saclSize,
+                                   owner,
+                                   &ownerSize,
+                                   group,
+                                   &groupSize));
 
     RETURN_IF_FAILED(CoInitializeSecurity(
-        absoluteSd.get(), 
-        -1, 
-        nullptr, 
-        nullptr, 
-        RPC_C_AUTHN_LEVEL_DEFAULT, 
-        RPC_C_IMP_LEVEL_IDENTIFY, 
-        nullptr, 
-        EOAC_NONE, 
-        nullptr));
+                         absoluteSd.get(),
+                         -1,
+                         nullptr,
+                         nullptr,
+                         RPC_C_AUTHN_LEVEL_DEFAULT,
+                         RPC_C_IMP_LEVEL_IDENTIFY,
+                         nullptr,
+                         EOAC_NONE,
+                         nullptr));
 
     return S_OK;
 }
@@ -109,7 +109,7 @@ int __stdcall wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
 
     wil::unique_event shutdownEvent(wil::EventOptions::ManualReset);
     // Create WRL OOP module manager. Callback will be called when
-    // all objects have disconnected. 
+    // all objects have disconnected.
 #pragma warning( disable : 4324 )
     auto &module = Module<OutOfProc>::Create([&]()
     {
@@ -123,7 +123,7 @@ int __stdcall wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
     // Wait for module to signal that all objects have disconnected
     shutdownEvent.wait(INFINITE);
 
-    // Unregister all objects from COM and shutdown. 
+    // Unregister all objects from COM and shutdown.
     winrt::check_hresult(module.UnregisterObjects());
 
     //Utils::TraceManager::ShutdownTracing();

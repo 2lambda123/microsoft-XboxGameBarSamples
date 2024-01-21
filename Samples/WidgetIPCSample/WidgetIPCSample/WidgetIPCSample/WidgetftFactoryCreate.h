@@ -5,5 +5,5 @@
 
 namespace winrt::WidgetIPCSample::implementation
 {
-    WidgetFTServer::WidgetftFactory WidgetftFactoryCreate();
+WidgetFTServer::WidgetftFactory WidgetftFactoryCreate();
 }

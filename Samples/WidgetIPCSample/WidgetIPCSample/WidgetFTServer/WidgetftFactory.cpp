@@ -3,26 +3,26 @@
 
 namespace winrt::WidgetFTServer::implementation
 {
-    WidgetftFactory::WidgetftFactory()
+WidgetftFactory::WidgetftFactory()
+{
+    auto modulePtr = ::Microsoft::WRL::GetModuleBase();
+    if (modulePtr != nullptr)
     {
-        auto modulePtr = ::Microsoft::WRL::GetModuleBase();
-        if (modulePtr != nullptr)
-        {
-            modulePtr->IncrementObjectCount();
-        }
+        modulePtr->IncrementObjectCount();
     }
+}
 
-    WidgetftFactory::~WidgetftFactory()
+WidgetftFactory::~WidgetftFactory()
+{
+    auto modulePtr = ::Microsoft::WRL::GetModuleBase();
+    if (modulePtr != nullptr)
     {
-        auto modulePtr = ::Microsoft::WRL::GetModuleBase();
-        if (modulePtr != nullptr)
-        {
-            modulePtr->DecrementObjectCount();
-        }
+        modulePtr->DecrementObjectCount();
     }
+}
 
-    void WidgetftFactory::Test()
-    {
-        OutputDebugString(L"Hello this is  workinngggggg");
-    }
+void WidgetftFactory::Test()
+{
+    OutputDebugString(L"Hello this is  workinngggggg");
+}
 }

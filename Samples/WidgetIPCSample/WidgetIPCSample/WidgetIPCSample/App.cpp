@@ -26,13 +26,13 @@ App::App()
 
 #if defined _DEBUG && !defined DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION
     UnhandledException([this](IInspectable const&, UnhandledExceptionEventArgs const& e)
+    {
+        if (IsDebuggerPresent())
         {
-            if (IsDebuggerPresent())
-            {
-                auto errorMessage = e.Message();
-                __debugbreak();
-            }
-        });
+            auto errorMessage = e.Message();
+            __debugbreak();
+        }
+    });
 #endif
 }
 
@@ -57,7 +57,7 @@ void App::OnActivated(IActivatedEventArgs const& e)
         std::wstring appExtId{ widgetArgs.AppExtensionId() };
 
         //
-        // If IsLaunchActivation is true, this is Game Bar's initial activation of us 
+        // If IsLaunchActivation is true, this is Game Bar's initial activation of us
         // and we MUST create and hold onto XboxGameBarWidget.
         //
         // Otherwise this is a subsequent activation coming from Game Bar. We should
@@ -76,20 +76,20 @@ void App::OnActivated(IActivatedEventArgs const& e)
             if (0 == appExtId.compare(L"WidgetIPC"))
             {
                 m_widget1 = XboxGameBarWidget(
-                    widgetArgs,
-                    Window::Current().CoreWindow(),
-                    rootFrame);
+                                widgetArgs,
+                                Window::Current().CoreWindow(),
+                                rootFrame);
                 rootFrame.Navigate(xaml_typename<WidgetIPCSample::WidgetIPC>(), m_widget1);
             }
             //TODO: add WidgetIPCSettings
-           /* else if (0 == appExtId.compare(L"Widget1Settings"))
-            {
-                m_widget1Settings = XboxGameBarWidget(
-                    widgetArgs,
-                    Window::Current().CoreWindow(),
-                    rootFrame);
-                rootFrame.Navigate(xaml_typename<WidgetIPCSample::WidgetIPCSampleSettings>());
-            }*/
+            /* else if (0 == appExtId.compare(L"Widget1Settings"))
+             {
+                 m_widget1Settings = XboxGameBarWidget(
+                     widgetArgs,
+                     Window::Current().CoreWindow(),
+                     rootFrame);
+                 rootFrame.Navigate(xaml_typename<WidgetIPCSample::WidgetIPCSampleSettings>());
+             }*/
             else
             {
                 // Unknown - Game Bar should never send you an unknown App Extension Id

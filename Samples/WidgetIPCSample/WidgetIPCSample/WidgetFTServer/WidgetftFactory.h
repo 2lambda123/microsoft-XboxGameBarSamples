@@ -3,10 +3,10 @@
 
 namespace winrt::WidgetFTServer::implementation
 {
-    struct WidgetftFactory : WidgetftFactoryT<WidgetftFactory>
-    {
-        WidgetftFactory();
-        virtual ~WidgetftFactory();
-        void Test();
-    };
+struct WidgetftFactory : WidgetftFactoryT<WidgetftFactory>
+{
+    WidgetftFactory();
+    virtual ~WidgetftFactory();
+    void Test();
+};
 }
